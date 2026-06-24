@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  llm-engine:
+    image: ollama/ollama:latest
+    container_name: local_llm_engine
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama_data:/root/.ollama
+    # In production, GPU limits and reservations go here:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    environment:
+      - OLLAMA_KEEP_ALIVE=5m
